@@ -51,6 +51,16 @@ class AnimationViewController: UIViewController, HeaderViewDelegate {
         }
     }
     
+    @objc func handlePan(recognizer:UIPanGestureRecognizer) {
+        
+        let translation = recognizer.translation(in: self.view)
+        if let view = recognizer.view {
+            view.center = CGPoint(x:view.center.x + translation.x,
+                                  y:view.center.y + translation.y)
+        }
+        recognizer.setTranslation(CGPoint.zero, in: self.view)
+    }
+    
     func setupViews() {
         let header = HeaderView(title: headerTitle, showBackButton: true)
         header.delegate = self
@@ -62,5 +72,8 @@ class AnimationViewController: UIViewController, HeaderViewDelegate {
             $0.leading.equalToSuperview()
             $0.trailing.equalToSuperview()
         }
+        
+        let panGesture = UIPanGestureRecognizer(target: self, action: #selector(self.handlePan))
+        logoView.addGestureRecognizer(panGesture)
     }
 }

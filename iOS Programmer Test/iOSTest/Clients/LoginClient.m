@@ -29,7 +29,46 @@
 
 - (void)loginWithEmail:(NSString *)email password:(NSString *)password completion:(void (^)(NSDictionary *))completion
 {
+    NSString *bodyString = [NSString stringWithFormat:@"%@%@%@%@", @"email=", email, @"&password=", password];
+    NSLog(@"bodyString: %@", bodyString);
+    NSData *postData = [bodyString dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
 
+    NSString *postLength = [NSString stringWithFormat:@"%lu", (unsigned long)[postData length]];
+
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"http://dev.rapptrlabs.com/Tests/scripts/login.php"]];
+    [request setHTTPMethod:@"POST"];
+    [request setValue:postLength forHTTPHeaderField:@"Content-Length"];
+    [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
+    [request setHTTPBody:postData];
+    
+    NSURLSession *session = [NSURLSession sharedSession];
+    NSURLSessionDataTask *dataTask = [session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+        // do something with the data
+        
+        NSLog(@"Response code: %@", response);
+        if (error) {
+            NSLog(@"dataTaskWithRequest error: %@", error);
+            NSDictionary *dict = @{ @"status code" : @"error", @"Error" : error};
+            completion(dict);
+        }
+        
+        // handle HTTP errors here
+        
+        if ([response isKindOfClass:[NSHTTPURLResponse class]]) {
+            
+            NSInteger statusCode = [(NSHTTPURLResponse *)response statusCode];
+            
+            if (statusCode != 200) {
+                NSLog(@"dataTaskWithRequest HTTP status code: %ld", (long)statusCode);
+                NSDictionary *dict = @{ @"status code" : @(statusCode), @"Error" : @(statusCode)};
+                completion(dict);
+            } else {
+                NSDictionary *dict = @{ @"status code" : @(statusCode)};
+                completion(dict);
+            }
+        }
+    }];
+    [dataTask resume];
 }
 
 @end

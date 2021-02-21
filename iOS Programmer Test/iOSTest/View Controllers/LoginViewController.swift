@@ -51,7 +51,35 @@ class LoginViewController: UIViewController, HeaderViewDelegate {
     }
     
     @IBAction func didPressLoginButton(_ sender: Any) {
+        let startDate = Date()
         
+        LoginClient().login(withEmail: emailTextField.text, password: passwordTextField.text) { (returnDictionary) in // [AnyHashable: Any]?
+            let executionTime = Date().timeIntervalSince(startDate)
+            let executionTimeInSeconds = Double(executionTime.truncatingRemainder(dividingBy: 60))
+            print("Execution Time: \(executionTimeInSeconds)")
+            let statusCode = returnDictionary?["status code"]
+            if let statusCode = statusCode, statusCode as? Int == 200 {
+                print("status code: \(statusCode)")
+                self.showAlert(message: "Logged In! \n Login took: \(String(format: "%.3f", executionTimeInSeconds)) seconds")
+            } else if let error = returnDictionary?["error"] {
+                self.showAlert(message: "There was an error logging in, please retry later. \n Error: \(error)")
+            } else {
+                self.showAlert(message: "Unknown Error occurred, please retry later.")
+            }
+        }
+    }
+    
+    func showAlert(message: String) {
+        let alertController = UIAlertController(title: "Login Result", message: message, preferredStyle: .alert)
+        let okayAction = UIAlertAction(title: "OK", style: .cancel) { _ in
+            self.navigationController?.popViewController(animated: true)
+        }
+        
+        alertController.addAction(okayAction)
+        
+        DispatchQueue.main.async {
+            self.present(alertController, animated: true, completion: nil)
+        }
     }
     
     func setupViews() {

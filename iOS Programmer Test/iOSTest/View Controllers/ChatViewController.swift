@@ -6,7 +6,7 @@
 
 import UIKit
 
-class ChatViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class ChatViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, HeaderViewDelegate {
     
     /**
      * =========================================================================================
@@ -24,6 +24,7 @@ class ChatViewController: UIViewController, UITableViewDataSource, UITableViewDe
     // MARK: - Properties
     private var client: ChatClient?
     private var messages: [Message]?
+    private var headerTitle = "Chat"
     
     // MARK: - Outlets
     @IBOutlet weak var chatTable: UITableView!
@@ -34,7 +35,8 @@ class ChatViewController: UIViewController, UITableViewDataSource, UITableViewDe
         
         messages = [Message]()
         configureTable(tableView: chatTable)
-        title = "Chat"
+        title = headerTitle
+        setupViews()
         
         // TODO: Remove test data when we have actual data from the server loaded
         messages?.append(Message(testName: "James", withTestMessage: "Hey Guys!"))
@@ -79,8 +81,20 @@ class ChatViewController: UIViewController, UITableViewDataSource, UITableViewDe
     }
     
     // MARK: - IBAction
-    @IBAction func backAction(_ sender: Any) {
-        //        let mainMenuViewController = MenuViewController()
-                self.navigationController?.popViewController(animated: true)
+    func backButtonPressed(headerView: HeaderView) {
+        self.navigationController?.popViewController(animated: true)
+    }
+    
+    func setupViews() {
+        let header = HeaderView(title: headerTitle, showBackButton: true)
+        header.delegate = self
+        view.addSubview(header)
+        
+        header.snp.makeConstraints {
+            $0.top.equalToSuperview()
+            $0.height.equalTo(64)
+            $0.leading.equalToSuperview()
+            $0.trailing.equalToSuperview()
+        }
     }
 }

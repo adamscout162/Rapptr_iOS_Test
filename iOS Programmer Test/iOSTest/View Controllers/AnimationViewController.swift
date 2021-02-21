@@ -6,7 +6,7 @@
 
 import UIKit
 
-class AnimationViewController: UIViewController {
+class AnimationViewController: UIViewController, HeaderViewDelegate {
     
     /**
      * =========================================================================================
@@ -23,18 +23,34 @@ class AnimationViewController: UIViewController {
      *
      **/
     
+    private let headerTitle = "Animation"
+    
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "Animation"
+        title = headerTitle
+        
+        setupViews()
     }
     
     // MARK: - Actions
-    @IBAction func backAction(_ sender: Any) {
-        //        let mainMenuViewController = MenuViewController()
-                self.navigationController?.popViewController(animated: true)
+    func backButtonPressed(headerView: HeaderView) {
+        self.navigationController?.popViewController(animated: true)
     }
     
     @IBAction func didPressFade(_ sender: Any) {
+    }
+    
+    func setupViews() {
+        let header = HeaderView(title: headerTitle, showBackButton: true)
+        header.delegate = self
+        view.addSubview(header)
+        
+        header.snp.makeConstraints {
+            $0.top.equalToSuperview()
+            $0.height.equalTo(64)
+            $0.leading.equalToSuperview()
+            $0.trailing.equalToSuperview()
+        }
     }
 }

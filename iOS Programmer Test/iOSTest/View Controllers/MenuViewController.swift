@@ -6,6 +6,7 @@
 
 import Foundation
 import UIKit
+import SnapKit
 
 class MenuViewController: UIViewController {
     
@@ -34,10 +35,12 @@ class MenuViewController: UIViewController {
     @IBOutlet weak var loginButton: UIButton!
     @IBOutlet weak var animationButton: UIButton!
     
+    let headerTitle = "Coding Tasks"
+    
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "Coding Tasks"
+        title = headerTitle
         setupViews()
     }
     
@@ -58,22 +61,15 @@ class MenuViewController: UIViewController {
     }
     
     func setupViews() {
-        let header = UIView()
-        header.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 64)
-        header.backgroundColor = #colorLiteral(red: 0.0220622886, green: 0.4392663538, blue: 0.6077302694, alpha: 1)
+        let header = HeaderView(title: headerTitle, showBackButton: false)
         view.addSubview(header)
         
-        let fontSize: CGFloat = 17
-        
-        let titleLabel = UILabel()
-        titleLabel.text = title
-        titleLabel.font = .systemFont(ofSize: fontSize, weight: .semibold)
-        titleLabel.textColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
-        titleLabel.numberOfLines = 0
-//        titleLabel.center = CGPoint(x: header.frame.midX, y: header.frame.maxY - (fontSize * 1.25))
-        titleLabel.frame = CGRect(x: header.center.x, y: header.frame.maxY - (fontSize * 1.25), width: header.frame.width, height: fontSize)
-//        titleLabel.center.x = header.center.x
-        header.addSubview(titleLabel)
+        header.snp.makeConstraints {
+            $0.top.equalToSuperview()
+            $0.height.equalTo(64)
+            $0.leading.equalToSuperview()
+            $0.trailing.equalToSuperview()
+        }
         
         let background = UIImage(named: "bg_home_menu")
         

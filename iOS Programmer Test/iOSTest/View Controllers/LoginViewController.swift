@@ -6,8 +6,7 @@
 
 import UIKit
 
-class LoginViewController: UIViewController {
-    
+class LoginViewController: UIViewController, HeaderViewDelegate {
     /**
      * =========================================================================================
      * INSTRUCTIONS
@@ -29,11 +28,12 @@ class LoginViewController: UIViewController {
     
     // MARK: - Properties
     private var client: LoginClient?
+    private let headerTitle = "Login"
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "Login"
+        title = headerTitle
         setupViews()
     }
     
@@ -43,8 +43,8 @@ class LoginViewController: UIViewController {
     }
     
     // MARK: - Actions
-    @IBAction func backAction(_ sender: Any) {
-//        let mainMenuViewController = MenuViewController()
+    
+    func backButtonPressed(headerView: HeaderView) {
         self.navigationController?.popViewController(animated: true)
     }
     
@@ -52,6 +52,17 @@ class LoginViewController: UIViewController {
     }
     
     func setupViews() {
+        let header = HeaderView(title: headerTitle, showBackButton: true)
+        header.delegate = self
+        view.addSubview(header)
+        
+        header.snp.makeConstraints {
+            $0.top.equalToSuperview()
+            $0.height.equalTo(64)
+            $0.leading.equalToSuperview()
+            $0.trailing.equalToSuperview()
+        }
+        
         let background = UIImage(named: "img_login")
         
         let backgroundImage = UIImageView(frame: UIScreen.main.bounds)

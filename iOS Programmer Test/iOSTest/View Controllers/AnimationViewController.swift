@@ -39,6 +39,7 @@ class AnimationViewController: UIViewController, HeaderViewDelegate {
     }
     
     @IBAction func didPressFade(_ sender: Any) {
+        
     }
     
     func setupViews() {
@@ -48,7 +49,7 @@ class AnimationViewController: UIViewController, HeaderViewDelegate {
         
         header.snp.makeConstraints {
             $0.top.equalToSuperview()
-            $0.height.equalTo(64)
+            $0.bottom.equalTo(view.safeAreaLayoutGuide.snp.topMargin).offset(64)
             $0.leading.equalToSuperview()
             $0.trailing.equalToSuperview()
         }

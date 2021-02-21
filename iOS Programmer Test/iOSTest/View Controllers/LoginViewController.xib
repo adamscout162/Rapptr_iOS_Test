@@ -9,6 +9,8 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="LoginViewController">
             <connections>
+                <outlet property="emailTextField" destination="xoa-Sh-ZA6" id="lnb-SJ-DZL"/>
+                <outlet property="passwordTextField" destination="9Yh-GL-2qX" id="Mm6-i5-Gd0"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -22,7 +24,6 @@
                     <subviews>
                         <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="email" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="xoa-Sh-ZA6" userLabel="UITextField">
                             <rect key="frame" x="0.0" y="0.0" width="315" height="55"/>
-                            <color key="backgroundColor" red="0.97647058823529409" green="0.97647058823529409" blue="0.97647058823529409" alpha="0.80000000000000004" colorSpace="custom" customColorSpace="calibratedRGB"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="55" id="Rx8-gg-RZP"/>
                             </constraints>
@@ -31,7 +32,6 @@
                         </textField>
                         <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="password" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="9Yh-GL-2qX" userLabel="UITextField">
                             <rect key="frame" x="0.0" y="79" width="315" height="55"/>
-                            <color key="backgroundColor" red="0.97647058823529409" green="0.97647058823529409" blue="0.97647058823529409" alpha="0.80000000000000004" colorSpace="custom" customColorSpace="calibratedRGB"/>
                             <rect key="contentStretch" x="1" y="0.0" width="1" height="1"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="55" id="eNw-Vs-36B"/>

@@ -29,6 +29,8 @@ class LoginViewController: UIViewController, HeaderViewDelegate {
     // MARK: - Properties
     private var client: LoginClient?
     private let headerTitle = "Login"
+    @IBOutlet weak var emailTextField: UITextField!
+    @IBOutlet weak var passwordTextField: UITextField!
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
@@ -49,6 +51,7 @@ class LoginViewController: UIViewController, HeaderViewDelegate {
     }
     
     @IBAction func didPressLoginButton(_ sender: Any) {
+        
     }
     
     func setupViews() {
@@ -63,11 +66,26 @@ class LoginViewController: UIViewController, HeaderViewDelegate {
             $0.trailing.equalToSuperview()
         }
         
+        let emailPaddingView = UIView(frame: CGRect(x: 0, y: 0, width: 24, height: 55))
+        emailTextField.leftView = emailPaddingView
+        emailTextField.leftViewMode = .always
+        emailTextField.backgroundColor = #colorLiteral(red: 0.9764705882, green: 0.9764705882, blue: 0.9764705882, alpha: 0.8)
+        emailTextField.alpha = 0.8
+        
+        let passwordPaddingView = UIView(frame: CGRect(x: 0, y: 0, width: 24, height: 55))
+        passwordTextField.leftView = passwordPaddingView
+        passwordTextField.leftViewMode = .always
+        passwordTextField.backgroundColor = #colorLiteral(red: 0.9764705882, green: 0.9764705882, blue: 0.9764705882, alpha: 0.8)
+        passwordTextField.alpha = 0.8
+        
         let background = UIImage(named: "img_login")
         
         let backgroundImage = UIImageView(frame: UIScreen.main.bounds)
         backgroundImage.image = background
         backgroundImage.contentMode = UIView.ContentMode.scaleAspectFill
         view.insertSubview(backgroundImage, at: 0)
+        
+        emailTextField.layer.cornerRadius = 8
+        passwordTextField.layer.cornerRadius = 8
     }
 }

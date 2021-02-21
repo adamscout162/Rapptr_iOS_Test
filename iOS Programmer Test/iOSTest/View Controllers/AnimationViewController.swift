@@ -24,6 +24,7 @@ class AnimationViewController: UIViewController, HeaderViewDelegate {
      **/
     
     private let headerTitle = "Animation"
+    @IBOutlet weak var logoView: UIImageView!
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
@@ -39,7 +40,15 @@ class AnimationViewController: UIViewController, HeaderViewDelegate {
     }
     
     @IBAction func didPressFade(_ sender: Any) {
-        
+        if logoView.alpha == 1.0 {
+            UIView.animate(withDuration: 3.0, delay: 0, options: .curveEaseOut, animations: {
+                self.logoView.alpha = 0.0
+            })
+        } else {
+            UIView.animate(withDuration: 3.0, delay: 0, options: .curveEaseIn, animations: {
+                self.logoView.alpha = 1.0
+            })
+        }
     }
     
     func setupViews() {

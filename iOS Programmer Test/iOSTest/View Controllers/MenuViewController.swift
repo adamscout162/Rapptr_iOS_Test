@@ -77,5 +77,9 @@ class MenuViewController: UIViewController {
         backgroundImage.image = background
         backgroundImage.contentMode = UIView.ContentMode.scaleAspectFill
         view.insertSubview(backgroundImage, at: 0)
+        
+        chatButton.layer.cornerRadius = 8
+        loginButton.layer.cornerRadius = 8
+        animationButton.layer.cornerRadius = 8
     }
 }

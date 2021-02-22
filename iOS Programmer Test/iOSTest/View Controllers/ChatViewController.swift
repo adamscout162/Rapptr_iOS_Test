@@ -50,6 +50,18 @@ class ChatViewController: UIViewController, UITableViewDataSource, UITableViewDe
         messages?.append(Message(testName:"Amy", withTestMessage:"See you there :P"))
         
         chatTable.reloadData()
+        
+        ChatClient().getChatMessages { (messages) in
+            guard let messages = messages else { return }
+            
+            for message in messages {
+                print("Message username: \(message.username)")
+                print("Message text: \(message.text)")
+                print("Message userID: \(message.userID)")
+                print("Message avatarURL: \(message.avatarURL)")
+                print("--------------")
+            }
+        }
     }
     
     // MARK: - Private

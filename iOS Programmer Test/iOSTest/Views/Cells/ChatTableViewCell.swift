@@ -54,8 +54,8 @@ class ChatTableViewCell: UITableViewCell {
         container.addSubview(userAvatar)
         
         userAvatar.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(16)
-            $0.leading.equalToSuperview().offset(16)
+            $0.top.equalToSuperview()
+            $0.leading.equalToSuperview()
             $0.height.equalTo(36)
             $0.width.equalTo(36)
         }
@@ -63,29 +63,27 @@ class ChatTableViewCell: UITableViewCell {
         container.addSubview(userAvatar)
         
         header.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(16)
+            $0.top.equalToSuperview()
             $0.leading.equalTo(userAvatar.snp.trailing).offset(7)
         }
         
         let bodyContainer = UIView()
         bodyContainer.backgroundColor = #colorLiteral(red: 0.937254902, green: 0.937254902, blue: 0.937254902, alpha: 1)
         bodyContainer.layer.cornerRadius = 8
+        bodyContainer.layer.borderColor = #colorLiteral(red: 0.937254902, green: 0.937254902, blue: 0.937254902, alpha: 1)
+        bodyContainer.layer.borderWidth = 1.0
         container.addSubview(bodyContainer)
         
         bodyContainer.snp.makeConstraints {
             $0.top.equalTo(header.snp.bottom).offset(4)
             $0.leading.equalTo(userAvatar.snp.trailing).offset(7)
-            $0.trailing.equalToSuperview().offset(-36)
+            $0.trailing.equalToSuperview()
             $0.bottom.equalToSuperview().offset(-24)
         }
         
         bodyContainer.addSubview(body)
         
         body.numberOfLines = 0
-        body.backgroundColor = #colorLiteral(red: 0.937254902, green: 0.937254902, blue: 0.937254902, alpha: 1)
-        body.layer.cornerRadius = 8
-        body.layer.borderColor = #colorLiteral(red: 0.937254902, green: 0.937254902, blue: 0.937254902, alpha: 1)
-        body.layer.borderWidth = 1.0
         
         body.snp.makeConstraints {
             $0.edges.equalToSuperview()

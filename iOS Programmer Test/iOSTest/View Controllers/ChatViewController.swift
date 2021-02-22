@@ -112,14 +112,12 @@ class ChatViewController: UIViewController, UITableViewDataSource, UITableViewDe
             $0.trailing.equalToSuperview()
         }
         
-        chatTable.rowHeight = UITableView.automaticDimension
         chatTable.allowsSelection = false
-        chatTable.estimatedRowHeight = 200
 
         chatTable.snp.makeConstraints {
-            $0.leading.equalToSuperview()
-            $0.trailing.equalToSuperview()
-            $0.top.equalTo(header.snp.bottom)
+            $0.leading.equalToSuperview().offset(16)
+            $0.trailing.equalToSuperview().offset(-36)
+            $0.top.equalTo(header.snp.bottom).offset(16)
             $0.bottom.equalToSuperview()
         }
     }

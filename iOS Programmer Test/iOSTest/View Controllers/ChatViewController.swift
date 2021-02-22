@@ -39,27 +39,30 @@ class ChatViewController: UIViewController, UITableViewDataSource, UITableViewDe
         setupViews()
         
         // TODO: Remove test data when we have actual data from the server loaded
-        messages?.append(Message(testName: "James", withTestMessage: "Hey Guys!"))
-        messages?.append(Message(testName:"Paul", withTestMessage:"What's up?"))
-        messages?.append(Message(testName:"Amy", withTestMessage:"Hey! :)"))
-        messages?.append(Message(testName:"James", withTestMessage:"Want to grab some food later?"))
-        messages?.append(Message(testName:"Paul", withTestMessage:"Sure, time and place?"))
-        messages?.append(Message(testName:"Amy", withTestMessage:"YAS! I am starving!!!"))
-        messages?.append(Message(testName:"James", withTestMessage:"1 hr at the Local Burger sound good?"))
-        messages?.append(Message(testName:"Paul", withTestMessage:"Sure thing"))
-        messages?.append(Message(testName:"Amy", withTestMessage:"See you there :P"))
+//        messages?.append(Message(testName: "James", withTestMessage: "Hey Guys!"))
+//        messages?.append(Message(testName:"Paul", withTestMessage:"What's up?"))
+//        messages?.append(Message(testName:"Amy", withTestMessage:"Hey! :)"))
+//        messages?.append(Message(testName:"James", withTestMessage:"Want to grab some food later?"))
+//        messages?.append(Message(testName:"Paul", withTestMessage:"Sure, time and place?"))
+//        messages?.append(Message(testName:"Amy", withTestMessage:"YAS! I am starving!!!"))
+//        messages?.append(Message(testName:"James", withTestMessage:"1 hr at the Local Burger sound good?"))
+//        messages?.append(Message(testName:"Paul", withTestMessage:"Sure thing"))
+//        messages?.append(Message(testName:"Amy", withTestMessage:"See you there :P"))
+//
+//        chatTable.reloadData()
         
-        chatTable.reloadData()
-        
-        ChatClient().getChatMessages { (messages) in
-            guard let messages = messages else { return }
-            
-            for message in messages {
-                print("Message username: \(message.username)")
-                print("Message text: \(message.text)")
-                print("Message userID: \(message.userID)")
-                print("Message avatarURL: \(message.avatarURL)")
-                print("--------------")
+        setupDataSource()
+    }
+    
+    private func setupDataSource() {
+        DispatchQueue.global(qos: .background).async {
+            ChatClient().getChatMessages { (chatMessages) in
+                guard let chatMessages = chatMessages else { return }
+                self.messages = chatMessages
+                
+                DispatchQueue.main.async {
+                    self.chatTable.reloadData()
+                }
             }
         }
     }
@@ -68,8 +71,7 @@ class ChatViewController: UIViewController, UITableViewDataSource, UITableViewDe
     private func configureTable(tableView: UITableView) {
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.register(UINib(nibName: "ChatTableViewCell", bundle: nil), forCellReuseIdentifier: "ChatTableViewCell")
-        tableView.tableFooterView = UIView(frame: .zero)
+        tableView.register(ChatTableViewCell.self, forCellReuseIdentifier: "ChatTableViewCell")
     }
     
     // MARK: - UITableViewDataSource
@@ -79,6 +81,7 @@ class ChatViewController: UIViewController, UITableViewDataSource, UITableViewDe
             let nibs = Bundle.main.loadNibNamed("ChatTableViewCell", owner: self, options: nil)
             cell = nibs?[0] as? ChatTableViewCell
         }
+        
         cell?.setCellData(message: messages![indexPath.row])
         return cell!
     }
@@ -87,9 +90,9 @@ class ChatViewController: UIViewController, UITableViewDataSource, UITableViewDe
         return messages!.count
     }
     
-    // MARK: - UITableViewDelegate
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 58.0
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        guard let cell = cell as? ChatTableViewCell else { return }
+        cell.downloadImage()
     }
     
     // MARK: - IBAction
@@ -107,6 +110,17 @@ class ChatViewController: UIViewController, UITableViewDataSource, UITableViewDe
             $0.bottom.equalTo(view.safeAreaLayoutGuide.snp.topMargin).offset(64)
             $0.leading.equalToSuperview()
             $0.trailing.equalToSuperview()
+        }
+        
+        chatTable.rowHeight = UITableView.automaticDimension
+        chatTable.allowsSelection = false
+        chatTable.estimatedRowHeight = 200
+
+        chatTable.snp.makeConstraints {
+            $0.leading.equalToSuperview()
+            $0.trailing.equalToSuperview()
+            $0.top.equalTo(header.snp.bottom)
+            $0.bottom.equalToSuperview()
         }
     }
 }

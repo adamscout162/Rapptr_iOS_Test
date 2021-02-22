@@ -25,6 +25,7 @@ class AnimationViewController: UIViewController, HeaderViewDelegate {
     
     private let headerTitle = "Animation"
     @IBOutlet weak var logoView: UIImageView!
+    @IBOutlet weak var animationButton: UIButton!
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
@@ -44,10 +45,14 @@ class AnimationViewController: UIViewController, HeaderViewDelegate {
             UIView.animate(withDuration: 3.0, delay: 0, options: .curveEaseOut, animations: {
                 self.logoView.alpha = 0.0
             })
+            
+            self.animationButton.setTitle("Fade In", for: .normal)
         } else {
             UIView.animate(withDuration: 3.0, delay: 0, options: .curveEaseIn, animations: {
                 self.logoView.alpha = 1.0
             })
+            
+            self.animationButton.setTitle("Fade Out", for: .normal)
         }
     }
     
@@ -72,6 +77,8 @@ class AnimationViewController: UIViewController, HeaderViewDelegate {
             $0.leading.equalToSuperview()
             $0.trailing.equalToSuperview()
         }
+        
+        animationButton.setTitle("Fade Out", for: .normal)
         
         let panGesture = UIPanGestureRecognizer(target: self, action: #selector(self.handlePan))
         logoView.addGestureRecognizer(panGesture)

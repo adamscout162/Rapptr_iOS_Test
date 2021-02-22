@@ -73,7 +73,7 @@ class HeaderView: UIView {
         header.addSubview(titleLabel)
         
         titleLabel.snp.makeConstraints {
-            $0.bottom.equalToSuperview().offset(-10)
+            $0.centerY.equalTo(backButton.snp.centerY)
             $0.centerX.equalToSuperview()
         }
     }

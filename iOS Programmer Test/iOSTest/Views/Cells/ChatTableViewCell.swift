@@ -45,7 +45,7 @@ class ChatTableViewCell: UITableViewCell {
         
         container.snp.makeConstraints {
             $0.top.equalToSuperview()
-            $0.bottom.equalToSuperview()
+            $0.bottom.equalToSuperview().offset(-24)
             $0.leading.equalToSuperview()
             $0.trailing.equalToSuperview()
         }
@@ -72,21 +72,27 @@ class ChatTableViewCell: UITableViewCell {
         bodyContainer.layer.cornerRadius = 8
         bodyContainer.layer.borderColor = #colorLiteral(red: 0.937254902, green: 0.937254902, blue: 0.937254902, alpha: 1)
         bodyContainer.layer.borderWidth = 1.0
+        bodyContainer.contentMode = .left
+        bodyContainer.autoresizesSubviews = false
         container.addSubview(bodyContainer)
         
         bodyContainer.snp.makeConstraints {
             $0.top.equalTo(header.snp.bottom).offset(4)
             $0.leading.equalTo(userAvatar.snp.trailing).offset(7)
             $0.trailing.equalToSuperview()
-            $0.bottom.equalToSuperview().offset(-24)
+            $0.bottom.equalToSuperview()
         }
         
         bodyContainer.addSubview(body)
         
         body.numberOfLines = 0
+        body.lineBreakMode = .byWordWrapping
         
         body.snp.makeConstraints {
-            $0.edges.equalToSuperview()
+            $0.top.equalToSuperview().offset(8)
+            $0.leading.equalToSuperview().offset(8)
+            $0.trailing.equalToSuperview().offset(-8)
+            $0.bottom.equalToSuperview().offset(-8)
         }
     }
     

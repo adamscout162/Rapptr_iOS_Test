@@ -10,7 +10,6 @@
 		6900F5E121BF4726007AFBB8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6900F5E021BF4726007AFBB8 /* Assets.xcassets */; };
 		6C747C5AB00F3235DF9F4C9E /* Pods_iOSTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 554BF18DD1E9328592E63496 /* Pods_iOSTest.framework */; };
 		AE4E7A7D25E3330200285B3F /* ChatClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE4E7A7C25E3330200285B3F /* ChatClient.swift */; };
-		AE4E7A8125E35F9000285B3F /* PaddingLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE4E7A8025E35F9000285B3F /* PaddingLabel.swift */; };
 		AE59978525E1DCB800B100F2 /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE59978425E1DCB800B100F2 /* HeaderView.swift */; };
 		F21312DA1E0481F80029E33F /* ChatClient.m in Sources */ = {isa = PBXBuildFile; fileRef = F21312D71E0481F80029E33F /* ChatClient.m */; };
 		F21312DB1E0481F80029E33F /* LoginClient.m in Sources */ = {isa = PBXBuildFile; fileRef = F21312D91E0481F80029E33F /* LoginClient.m */; };
@@ -36,7 +35,6 @@
 		554BF18DD1E9328592E63496 /* Pods_iOSTest.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iOSTest.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6900F5E021BF4726007AFBB8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		AE4E7A7C25E3330200285B3F /* ChatClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatClient.swift; sourceTree = "<group>"; };
-		AE4E7A8025E35F9000285B3F /* PaddingLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaddingLabel.swift; sourceTree = "<group>"; };
 		AE59978425E1DCB800B100F2 /* HeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
 		EC13D9C97231B41F53B539A4 /* Pods-iOSTest.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iOSTest.debug.xcconfig"; path = "Target Support Files/Pods-iOSTest/Pods-iOSTest.debug.xcconfig"; sourceTree = "<group>"; };
 		F21312D61E0481F80029E33F /* ChatClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ChatClient.h; path = Clients/ChatClient.h; sourceTree = "<group>"; };
@@ -87,14 +85,6 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
-		AE4E7A7F25E35F7D00285B3F /* Helpers */ = {
-			isa = PBXGroup;
-			children = (
-				AE4E7A8025E35F9000285B3F /* PaddingLabel.swift */,
-			);
-			name = Helpers;
-			sourceTree = "<group>";
-		};
 		F21312DC1E0485A50029E33F /* Animation */ = {
 			isa = PBXGroup;
 			children = (
@@ -125,7 +115,6 @@
 		F264BD9B1D7F4F0400275D46 /* iOSTest */ = {
 			isa = PBXGroup;
 			children = (
-				AE4E7A7F25E35F7D00285B3F /* Helpers */,
 				6900F5E021BF4726007AFBB8 /* Assets.xcassets */,
 				F2837BEE1D9AE99D00A57AC8 /* Clients */,
 				F273B63E1D95BD360069037F /* Models */,
@@ -367,7 +356,6 @@
 				F21312DA1E0481F80029E33F /* ChatClient.m in Sources */,
 				AE59978525E1DCB800B100F2 /* HeaderView.swift in Sources */,
 				F21312DB1E0481F80029E33F /* LoginClient.m in Sources */,
-				AE4E7A8125E35F9000285B3F /* PaddingLabel.swift in Sources */,
 				F2603FCB202A404D001BCA22 /* ChatTableViewCell.swift in Sources */,
 				F264BD9E1D7F4F0400275D46 /* main.m in Sources */,
 			);
